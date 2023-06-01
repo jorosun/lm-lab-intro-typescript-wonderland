@@ -4,7 +4,7 @@ import { askQuestion, clear, print } from "../ui/console";
 
 const VERDICTS = ["Guilty", "Not Guilty"] as const;
 type Verdict = (typeof VERDICTS)[number];
-
+// type witnessName = (typeof WITNESSES);
 interface Witness {
   name: string;
   giveEvidence: () => Verdict;
@@ -17,7 +17,14 @@ export function meetTheQueen(): void {
   let guilty: boolean = false;
 
   // let witnesses: Witness[] = []; // 👉 FIXME ❌ - call getWitnesses here
-  let witnesses = getWitnesses();
+  let witnessesString: string[] = [
+    "The Mad Hatter",
+    "The March Hare",
+    "The Cheshire Cat",
+    "The White Rabbit",
+  ];
+
+  let witnesses = getWitnesses(witnessesString);
 
   if (!witnesses || witnesses.length === 0) {
     print(`No witnesses have come forward to defend you.`);
@@ -45,7 +52,8 @@ export function meetTheQueen(): void {
 }
 
 // 👉 FIXME ❌ - this function needs writing to meet the above criteria
-function getWitnesses(): Array<Witness> {
+/*
+function getWitnesses(witnessNames: string[]): Witness[] {
   // return [];
   return [
     {
@@ -67,4 +75,10 @@ function getWitnesses(): Array<Witness> {
       giveEvidence: () => "Not Guilty",
     },
   ];
+}
+*/
+function getWitnesses(witnessNames: string[]): Witness[] {
+  return witnessNames.map((n) => {
+    return { name: n, giveEvidence: () => "Not Guilty" };
+  });
 }
